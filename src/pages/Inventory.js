@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Card, Table, Button, Space, Modal, Form, Input, Select, InputNumber, message } from 'antd';
 import { PlusOutlined, SwapOutlined, EditOutlined } from '@ant-design/icons';
 import apiService from '../services/apiService';
@@ -29,7 +29,7 @@ const Inventory = () => {
     { title: 'Reserved', dataIndex: 'quantity_reserved', key: 'quantity_reserved', render: (val) => val || 0 }
   ];
 
-  const fetchData = async (warehouseFilter = selectedWarehouse) => {
+  const fetchData = useCallback(async (warehouseFilter = selectedWarehouse) => {
     try {
       setLoading(true);
       const inventoryUrl = warehouseFilter === 'all' ? '/inventory' : `/inventory/warehouse/${warehouseFilter}`;
@@ -48,7 +48,7 @@ const Inventory = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedWarehouse]);
 
   const handleWarehouseChange = (warehouseId) => {
     setSelectedWarehouse(warehouseId);
@@ -102,7 +102,7 @@ const Inventory = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const renderModalContent = () => {
     switch (modalType) {

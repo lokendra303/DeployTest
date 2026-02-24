@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { ConfigProvider, Layout, message } from 'antd';
+import { ConfigProvider, Layout } from 'antd';
 import { AuthProvider, useAuth } from './hooks/useAuth';
 import { CurrencyProvider } from './contexts/CurrencyContext';
 import { withPermission } from './components/PermissionWrapper';

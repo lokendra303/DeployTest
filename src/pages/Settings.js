@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Card, Form, Select, Button, message, Space } from 'antd';
 import apiService from '../services/apiService';
 import { getCurrencies } from '../utils/currency';
@@ -8,11 +8,7 @@ const Settings = () => {
   const [loading, setLoading] = useState(false);
   const [currencies] = useState(getCurrencies());
 
-  useEffect(() => {
-    fetchSettings();
-  }, []);
-
-  const fetchSettings = async () => {
+  const fetchSettings = useCallback(async () => {
     try {
       setLoading(true);
       const response = await apiService.get('/settings');
@@ -26,7 +22,11 @@ const Settings = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [form]);
+
+  useEffect(() => {
+    fetchSettings();
+  }, [fetchSettings]);
 
   const handleSubmit = async (values) => {
     try {

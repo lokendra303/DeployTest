@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Card, Table, Button, Space, Modal, Form, Input, Select, message, InputNumber, Row, Col, Upload } from 'antd';
 import { PlusOutlined, EditOutlined, UploadOutlined } from '@ant-design/icons';
 import apiService from '../services/apiService';
@@ -13,13 +13,11 @@ const Items = () => {
   const [categories, setCategories] = useState([]);
   const [warehouses, setWarehouses] = useState([]);
   const [priceCurrency, setPriceCurrency] = useState('USD');
-  const [currencies] = useState(getCurrencies());
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [categoryModalVisible, setCategoryModalVisible] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
-  const [imageFile, setImageFile] = useState(null);
   const [form] = Form.useForm();
   const [categoryForm] = Form.useForm();
 
@@ -77,7 +75,7 @@ const Items = () => {
     }
   ];
 
-  const fetchItems = async () => {
+  const fetchItems = useCallback(async () => {
     try {
       setLoading(true);
       console.log('Fetching items...');
@@ -118,7 +116,7 @@ const Items = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user?.permissions]);
 
   const handleSubmit = async (values) => {
     try {
@@ -213,7 +211,7 @@ const Items = () => {
 
   useEffect(() => {
     fetchItems();
-  }, []);
+  }, [fetchItems]);
 
   return (
     <div style={{ padding: '24px' }}>
@@ -386,7 +384,7 @@ const Items = () => {
                       setImageUrl(e.target.result);
                     };
                     reader.readAsDataURL(file);
-                    setImageFile(file);
+
                     
                     return false; // Prevent auto upload
                   }}

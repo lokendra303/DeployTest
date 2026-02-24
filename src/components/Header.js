@@ -1,11 +1,10 @@
 import React from 'react';
-import { Layout, Button, Dropdown, Avatar, Space, Typography } from 'antd';
-import { MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined, LogoutOutlined, SettingOutlined } from '@ant-design/icons';
+import { Layout, Button, Dropdown, Avatar, Space } from 'antd';
+import { MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { useAuth } from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 
 const { Header: AntHeader } = Layout;
-const { Text } = Typography;
 
 const Header = ({ collapsed, setCollapsed, user }) => {
   const { logout } = useAuth();

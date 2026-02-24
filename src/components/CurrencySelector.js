@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Select, message } from 'antd';
 import { getCurrencies } from '../utils/currency';
 import { useCurrency } from '../contexts/CurrencyContext';

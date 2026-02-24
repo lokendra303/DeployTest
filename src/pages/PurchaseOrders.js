@@ -5,7 +5,6 @@ import apiService from '../services/apiService';
 
 const PurchaseOrders = () => {
   const [pos, setPOs] = useState([]);
-  const [vendors, setVendors] = useState([]);
   const [warehouses, setWarehouses] = useState([]);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -70,7 +69,6 @@ const PurchaseOrders = () => {
       ]);
       
       setPOs(posRes.success ? posRes.data : []);
-      setVendors(vendorsRes.success ? vendorsRes.data : []);
       setWarehouses(warehousesRes.success ? warehousesRes.data : []);
       setItems(itemsRes.success ? itemsRes.data : []);
     } catch (error) {
