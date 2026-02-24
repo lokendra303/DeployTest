@@ -18,6 +18,7 @@ const Items = () => {
   const [categoryModalVisible, setCategoryModalVisible] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
+  const [imageFile, setImageFile] = useState(null);
   const [form] = Form.useForm();
   const [categoryForm] = Form.useForm();
 
@@ -384,6 +385,7 @@ const Items = () => {
                       setImageUrl(e.target.result);
                     };
                     reader.readAsDataURL(file);
+                    setImageFile(file);
 
                     
                     return false; // Prevent auto upload
