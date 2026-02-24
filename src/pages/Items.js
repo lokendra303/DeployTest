@@ -4,7 +4,7 @@ import { PlusOutlined, EditOutlined, UploadOutlined } from '@ant-design/icons';
 import apiService from '../services/apiService';
 import { useAuth } from '../hooks/useAuth';
 import { useCurrency } from '../contexts/CurrencyContext';
-import { formatPrice, convertPrice, getCurrencies } from '../utils/currency';
+import { formatPrice, convertPrice } from '../utils/currency';
 
 const Items = () => {
   const { user } = useAuth();
@@ -18,7 +18,6 @@ const Items = () => {
   const [categoryModalVisible, setCategoryModalVisible] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
-  const [imageFile, setImageFile] = useState(null);
   const [form] = Form.useForm();
   const [categoryForm] = Form.useForm();
 
@@ -385,7 +384,6 @@ const Items = () => {
                       setImageUrl(e.target.result);
                     };
                     reader.readAsDataURL(file);
-                    setImageFile(file);
 
                     
                     return false; // Prevent auto upload

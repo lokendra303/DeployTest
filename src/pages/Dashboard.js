@@ -23,10 +23,6 @@ const Dashboard = () => {
     stockTrend: []
   });
 
-  useEffect(() => {
-    fetchDashboardData();
-  }, [fetchDashboardData]);
-
   const fetchDashboardData = useCallback(async () => {
     try {
       setLoading(true);
@@ -59,6 +55,10 @@ const Dashboard = () => {
       setLoading(false);
     }
   }, []);
+
+  useEffect(() => {
+    fetchDashboardData();
+  }, [fetchDashboardData]);
 
   const generateMockTrendData = () => {
     const data = [];

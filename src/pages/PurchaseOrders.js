@@ -61,9 +61,8 @@ const PurchaseOrders = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const [posRes, vendorsRes, warehousesRes, itemsRes] = await Promise.all([
+      const [posRes, warehousesRes, itemsRes] = await Promise.all([
         apiService.get('/purchase-orders').catch(() => ({ success: false, data: [] })),
-        apiService.get('/vendors').catch(() => ({ success: false, data: [] })),
         apiService.get('/warehouses'),
         apiService.get('/items')
       ]);
